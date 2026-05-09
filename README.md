@@ -31,7 +31,7 @@ A modern, fully-animated SaaS landing page for an AI writing assistant.
 
 ```bash
 # Clone the repo
-git clone https://github.com/KULLANICI_ADIN/writeflow-ai.git
+git clone https://github.com/OguzhanUgurluLab/writeflow-ai.git
 
 # Install dependencies
 npm install
@@ -51,7 +51,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 **Oğuzhan U.** - Full-Stack Developer
 
 - 🌐 Upwork: [Hire me](https://www.upwork.com/freelancers/~016c56cec5f7826866)
-- 💼 GitHub: [@KULLANICI_ADIN](https://github.com/KULLANICI_ADIN)
+- 💼 GitHub: [@OguzhanUgurluLab](https://github.com/OguzhanUgurluLab)
 
 ## 📄 License
 
