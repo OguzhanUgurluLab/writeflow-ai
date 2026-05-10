@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 import { 
   Sparkles, 
   Zap, 
@@ -10,10 +12,14 @@ import {
   Star,
   PenTool,
   Globe,
-  Shield
+  Shield,
+  LayoutDashboard
 } from "lucide-react";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-purple-950 to-slate-950 text-white overflow-hidden">
       
@@ -30,10 +36,26 @@ export default function Home() {
             <a href="#features" className="hover:text-purple-400 transition">Features</a>
             <a href="#pricing" className="hover:text-purple-400 transition">Pricing</a>
             <a href="#testimonials" className="hover:text-purple-400 transition">Reviews</a>
+            {!isLoggedIn && (
+              <Link href="/login" className="hover:text-purple-400 transition">Sign In</Link>
+            )}
           </div>
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition">
-            Get Started
-          </button>
+          {isLoggedIn ? (
+            <Link 
+              href="/dashboard" 
+              className="bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition inline-flex items-center gap-2"
+            >
+              <LayoutDashboard className="w-4 h-4" />
+              Dashboard
+            </Link>
+          ) : (
+            <Link 
+              href="/register" 
+              className="bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition inline-block"
+            >
+              Get Started
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -50,7 +72,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8 text-sm"
           >
             <Sparkles className="w-4 h-4 text-purple-400" />
-            <span>Powered by GPT-4 & Claude AI</span>
+            <span>Powered by Llama 3.3 & Groq AI</span>
           </motion.div>
 
           <motion.h1
@@ -80,13 +102,31 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button className="group bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition flex items-center gap-2">
-              Start Writing Free
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-            </button>
-            <button className="px-8 py-4 rounded-full font-semibold text-lg border border-white/20 hover:bg-white/5 transition">
-              Watch Demo
-            </button>
+            {isLoggedIn ? (
+              <Link 
+                href="/dashboard" 
+                className="group bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition flex items-center gap-2"
+              >
+                Go to Dashboard
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
+              </Link>
+            ) : (
+              <>
+                <Link 
+                  href="/register" 
+                  className="group bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition flex items-center gap-2"
+                >
+                  Start Writing Free
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
+                </Link>
+                <Link 
+                  href="/login" 
+                  className="px-8 py-4 rounded-full font-semibold text-lg border border-white/20 hover:bg-white/5 transition inline-block"
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
           </motion.div>
 
           <motion.div
@@ -101,7 +141,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-green-400" />
-              Free 7-day trial
+              10 free credits daily
             </div>
           </motion.div>
         </div>
@@ -128,11 +168,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Brain, title: "Smart AI Writing", desc: "Advanced GPT-4 model that understands context and creates human-like content." },
+              { icon: Brain, title: "Smart AI Writing", desc: "Advanced Llama 3.3 model that understands context and creates human-like content." },
               { icon: Zap, title: "Lightning Fast", desc: "Generate articles, emails, and copy in seconds. No more writer's block." },
-              { icon: PenTool, title: "50+ Templates", desc: "Pre-built templates for blogs, ads, social media, emails and more." },
-              { icon: Globe, title: "30+ Languages", desc: "Write fluently in over 30 languages with native-level accuracy." },
-              { icon: Shield, title: "100% Original", desc: "Built-in plagiarism detection ensures all content is unique and original." },
+              { icon: PenTool, title: "6+ Templates", desc: "Pre-built templates for blogs, ads, social media, emails and more." },
+              { icon: Globe, title: "Multi-Language", desc: "Write fluently in multiple languages with native-level accuracy." },
+              { icon: Shield, title: "100% Original", desc: "AI-generated content tailored to your unique requirements." },
               { icon: Sparkles, title: "SEO Optimized", desc: "Generate content that ranks. Built-in SEO best practices for every output." },
             ].map((feature, i) => (
               <motion.div
@@ -219,8 +259,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: "Free", price: "0", desc: "Perfect for trying out", features: ["10,000 words/month", "10+ templates", "Basic support"], popular: false },
-              { name: "Pro", price: "29", desc: "For serious writers", features: ["Unlimited words", "50+ templates", "Priority support", "API access", "Team collaboration"], popular: true },
+              { name: "Free", price: "0", desc: "Perfect for trying out", features: ["10 generations/day", "6+ templates", "Basic support"], popular: false },
+              { name: "Pro", price: "29", desc: "For serious writers", features: ["Unlimited generations", "All templates", "Priority support", "API access", "Team collaboration"], popular: true },
               { name: "Enterprise", price: "99", desc: "For teams & businesses", features: ["Everything in Pro", "Custom AI models", "Dedicated manager", "SSO & advanced security"], popular: false },
             ].map((plan, i) => (
               <motion.div
@@ -254,13 +294,16 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-3 rounded-full font-semibold transition ${
-                  plan.popular
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:scale-105"
-                    : "bg-white/10 hover:bg-white/20"
-                }`}>
-                  Get Started
-                </button>
+                <Link 
+                  href={isLoggedIn ? "/dashboard" : "/register"} 
+                  className={`block text-center w-full py-3 rounded-full font-semibold transition ${
+                    plan.popular
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:scale-105"
+                      : "bg-white/10 hover:bg-white/20"
+                  }`}
+                >
+                  {isLoggedIn ? "Go to Dashboard" : "Get Started"}
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -282,10 +325,13 @@ export default function Home() {
           <p className="text-xl text-gray-300 mb-8">
             Join 50,000+ writers who are creating amazing content with AI.
           </p>
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition inline-flex items-center gap-2">
-            Get Started Free
+          <Link 
+            href={isLoggedIn ? "/dashboard" : "/register"} 
+            className="bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition inline-flex items-center gap-2"
+          >
+            {isLoggedIn ? "Go to Dashboard" : "Get Started Free"}
             <ArrowRight className="w-5 h-5" />
-          </button>
+          </Link>
         </motion.div>
       </section>
 

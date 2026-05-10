@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+## 📌 ADIM 3: GitHub'a Push
+
+Terminal'de proje klasöründe (`C:\Users\ugurl\Projeler\writeflow-ai`):
+
+### Yeni repo oluşturuyorsan:
+
+**Önce GitHub'da repo oluştur:**
+1. https://github.com/new aç
+2. Repository name: `writeflow-ai`
+3. Public seç
+4. **README, .gitignore, license EKLEME** (zaten var)
+5. Create repository
+
+**Sonra terminal'de:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Git başlat (eğer başlatılmadıysa)
+git init
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Tüm dosyaları ekle
+git add .
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Commit
+git commit -m "feat: complete WriteFlow AI SaaS with auth, AI generation, history, and settings"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Branch ismi
+git branch -M main
 
-## Learn More
+# Remote ekle (URL'yi kendi repo URL'inle değiştir!)
+git remote add origin https://github.com/KULLANICI_ADIN/writeflow-ai.git
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Push
+git push -u origin main
