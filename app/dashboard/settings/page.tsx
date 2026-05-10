@@ -289,12 +289,12 @@ export default function SettingsPage() {
         <p className="text-gray-400 text-sm mb-4">
           Get unlimited credits, premium templates, and priority support
         </p>
-        <button
-          disabled
-          className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium px-6 py-3 rounded-xl opacity-50 cursor-not-allowed"
-        >
-          Coming Soon
-        </button>
+       <button
+  onClick={() => window.location.href = 'mailto:contact@writeflow.ai?subject=Pro Plan Interest'}
+  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+>
+  🚀 Notify Me When Available
+</button>
       </div>
     </div>
   )
